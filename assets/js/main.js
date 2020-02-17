@@ -18,7 +18,9 @@
   
   
     /*==================================================================
-    [ Validate ]*/
+    [ Validate ]
+    <a class="autenticationBtn" href="?c=User&a=Autenticar&email=<?php echo $_GET['email']; ?>&password=<?php echo $_GET['password']; ?>">Sign in</a>
+    */
     var input = $('.validate-input .input100');
 
     $('.validate-form').on('submit',function(){

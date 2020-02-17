@@ -257,7 +257,7 @@
     -moz-transition: all 0.4s;
     transition: all 0.4s;
   }
-  
+
   .input100 {
     font-family: OpenSans-Bold;
     font-size: 15px;
@@ -303,6 +303,21 @@
   
   /*------------------------------------------------------------------
   [ Button ]*/
+  .autenticationBtn {
+    font-family: OpenSans-Bold;
+    font-size: 15px;
+    color: #fff;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+  .autenticationBtn:hover{
+    font-family: OpenSans-Bold;
+    font-size: 15px;
+    color: #fff;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
   .container-login100-form-btn {
     width: 100%;
     display: -webkit-box;
@@ -370,6 +385,11 @@
   }
   .login100-form-btn:hover:before {
     opacity: 1;
+  }
+
+  .non-border{
+    border-bottom-left-radius: 0!important;
+    border-bottom-right-radius: 0!important;
   }
   
   

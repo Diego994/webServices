@@ -55,6 +55,22 @@
 			}
 		}
 
+		public function Autenticar($email)
+		{
+			try 
+			{
+				$stm = $this->pdo
+						->prepare("SELECT * FROM user WHERE email = ?");
+						
+
+				$stm->execute(array(strval($email)));
+				return $stm->fetch(PDO::FETCH_OBJ);
+			} catch (Exception $e) 
+			{
+				die($e->getMessage());
+			}
+		}
+
 		public function Eliminar($id)
 		{
 			try 

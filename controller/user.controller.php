@@ -15,11 +15,11 @@
             require_once 'view/footer.php';
         }
         
-        public function Crud(){
-            $alm = new User();
+        public function Resgistrar(){
+            $user = new User();
             
             if(isset($_REQUEST['id'])){
-                $alm = $this->model->Obtener($_REQUEST['id']);
+                $user = $this->model->Obtener($_REQUEST['id']);
             }
             
             require_once 'view/header.php';
@@ -28,18 +28,18 @@
         }
         
         public function Guardar(){
-            $alm = new User();
+            $user = new User();
             
-            $alm->id = $_REQUEST['id'];
-            $alm->name = $_REQUEST['name'];
-            $alm->lastName = $_REQUEST['lastName'];
-            $alm->password = $_REQUEST['password'];
-            $alm->email = $_REQUEST['email'];
-            $alm->telefon = $_REQUEST['telefon'];
+            $user->id = $_REQUEST['id'];
+            $user->name = $_REQUEST['name'];
+            $user->lastName = $_REQUEST['lastName'];
+            $user->password = $_REQUEST['password'];
+            $user->email = $_REQUEST['email'];
+            $user->telefon = $_REQUEST['telefon'];
 
-            $alm->id > 0 
-                ? $this->model->Actualizar($alm)
-                : $this->model->Registrar($alm);
+            $user->id > 0 
+                ? $this->model->Actualizar($user)
+                : $this->model->Registrar($user);
             
             header('Location: index.php');
         }
@@ -47,5 +47,32 @@
         public function Eliminar(){
             $this->model->Eliminar($_REQUEST['id']);
             header('Location: index.php');
+        }
+
+        public function Autenticar(){
+            $user = new User();
+
+            $dataEmail = $_REQUEST['email'];
+            $dataPassword = $_REQUEST['password'];
+
+            $user = $this->model->Autenticar(strval($dataEmail));
+
+            if(strcmp($dataEmail,$user->email) == 0 && $dataEmail !== '')
+            {
+                if(strcmp($dataPassword,$user->password) == 0 && $dataPassword !== ''){
+                require_once 'view/header.php';
+                require_once 'view/user.php';
+                require_once 'view/footer.php';
+                } else {
+                    require_once 'view/header.php';
+                    require_once 'view/login.php';
+                    require_once 'view/footer.php';
+                }
+            } else {
+                require_once 'view/header.php';
+                require_once 'view/login.php';
+                require_once 'view/footer.php';
+            }
+            
         }
 }

@@ -1,7 +1,7 @@
 <h1 class="page-header">Usuarios</h1>
 
 <div class="well well-sm text-right">
-    <a class="btn btn-primary" href="?c=User&a=Crud">Nuevo usuario</a>
+    <a class="btn btn-primary" href="?c=User&a=Registrar">Nuevo usuario</a>
 </div>
 
 <table class="table table-striped">
