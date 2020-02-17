@@ -1,7 +1,7 @@
 <div class="limiter">
 	<div class="container-login100">
 		<div class="wrap-login100 p-b-160 p-t-50">
-			<form class="login100-form validate-form" name="autenthicate" method="post">
+			<form class="login100-form validate-form" action ="index.php?c=User&a=Autenticar&email=<?php echo $_POST['email']; ?>&password=<?php echo $_POST['password']; ?>" name="autenthicate" method="post">
 				<span class="login100-form-title p-b-43">
 					Account Login
 				</span>
@@ -21,23 +21,25 @@
 
 				<div class="container-login100-form-btn">
 					<button class="login100-form-btn non-border">
-						<a class="autenticationBtn" href="?c=User&a=Autenticar&email=<?php echo $_POST['email']; ?>&password=<?php echo $_POST['password']; ?>">Sign in</a>
-					</button>
-				</div>
-
-
-				<div class="container-login100-form-btn">
-					<button class="login100-form-btn">
-						Sign up
+						Sign in
 					</button>
 				</div>
 				
+			</form>
+
+			<form class="login100-form validate-form" action ="index.php?c=User&a=Registrar" name="autenthicate" method="post">
+				<div class="container-login100-form-btn">
+					<button class="login100-form-btn">
+						Sign up					
+					</button>
+				</div>
+			</form>
+
 				<div class="text-center w-full p-t-23">
 					<a href="#" class="txt1">
 						Forgot password?
 					</a>
 				</div>
-			</form>
 		</div>
 	</div>
 </div>

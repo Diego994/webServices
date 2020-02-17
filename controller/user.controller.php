@@ -15,7 +15,7 @@
             require_once 'view/footer.php';
         }
         
-        public function Resgistrar(){
+        public function Registrar(){
             $user = new User();
             
             if(isset($_REQUEST['id'])){

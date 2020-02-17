@@ -23,7 +23,7 @@
             <td><?php echo $r->email; ?></td>
             <td><?php echo $r->telefon; ?></td>
             <td>
-                <a href="?c=User&a=Crud&id=<?php echo $r->id; ?>">Editar</a>
+                <a href="?c=User&a=Registrar&id=<?php echo $r->id; ?>">Editar</a>
             </td>
             <td>
                 <a onclick="javascript:return confirm('¿Seguro de eliminar este registro?');" href="?c=User&a=Eliminar&id=<?php echo $r->id; ?>">Eliminar</a>
