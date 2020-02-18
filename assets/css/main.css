@@ -394,8 +394,49 @@
     border-bottom-right-radius: 0!important;
   }
   
+  .saveBtn{
+    font-family: OpenSans-Bold;
+    font-size: 10px;
+    color: #fff;
+    text-transform: uppercase;
+  
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: inline;
+    justify-content: right;
+    align-items: center;
+    padding: 0 20px;
+    width: auto;
+    height: 45px;
+    overflow: hidden;
+    background: #111111;
+  
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+    position: relative;
+    z-index: 1;
+  }
+  .saveBtn:hover {
+    border: 2.2px solid black;
+    color: black;
+    background: white;
+  }
+
   
   
+  /*//////////////////////////////////////////////////////////////////
+  btns*/
+  .save{
+    text-align: right;
+  }
+  .return{
+    text-align: left;
+  }
+
   /*------------------------------------------------------------------
   [ Responsive ]*/
   
