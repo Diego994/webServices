@@ -5,35 +5,35 @@
                 <div class="card-body">
 
                     <h1 class="page-header">
-                        <?php echo $alm->id != null ? $alm->name : 'Nuevo Registro'; ?>
+                        <?php echo $user->id != null ? $user->name : 'Nuevo Registro'; ?>
                     </h1>
         
                     <form id="frm-user" action="?c=User&a=Guardar" method="post" enctype="multipart/form-data">
-                        <input type="hidden" name="id" value="<?php echo $alm->id; ?>" />
+                        <input type="hidden" name="id" value="<?php echo $user->id; ?>" />
         
                         <div class="form-group">
                             <label>Nombre</label>
-                            <input type="text" name="name" value="<?php echo $alm->name; ?>" class="form-control" placeholder="Ingrese su nombre" data-validacion-tipo="requerido|min:3" />
+                            <input type="text" name="name" value="<?php echo $user->name; ?>" class="form-control" placeholder="Ingrese su nombre" data-validacion-tipo="requerido|min:3" />
                         </div>
         
                         <div class="form-group">
                             <label>Apellido</label>
-                            <input type="text" name="lastName" value="<?php echo $alm->lastName; ?>" class="form-control" placeholder="Ingrese su apellido" data-validacion-tipo="requerido|min:3" />
+                            <input type="text" name="lastName" value="<?php echo $user->lastName; ?>" class="form-control" placeholder="Ingrese su apellido" data-validacion-tipo="requerido|min:3" />
                         </div>
         
                         <div class="form-group">
                             <label>Constraseña</label>
-                            <input type="password" name="password" value="<?php echo $alm->password; ?>" class="form-control" placeholder="Ingrese su contraseña" data-validacion-tipo="requerido|min:8" />
+                            <input type="password" name="password" value="<?php echo $user->password; ?>" class="form-control" placeholder="Ingrese su contraseña" data-validacion-tipo="requerido|min:8" />
                         </div>
         
                         <div class="form-group">
                             <label>Correo</label>
-                            <input type="text" name="email" value="<?php echo $alm->email; ?>" class="form-control" placeholder="Ingrese su correo electrónico" data-validacion-tipo="requerido|email" />
+                            <input type="text" name="email" value="<?php echo $user->email; ?>" class="form-control" placeholder="Ingrese su correo electrónico" data-validacion-tipo="requerido|email" />
                         </div>
         
                         <div class="form-group">
                             <label>Telefono</label>
-                            <input type="tel" name="telefon" value="<?php echo $alm->telefon; ?>" class="form-control" placeholder="Ingrese su telefono" data-validacion-tipo="requerido|min:10" />
+                            <input type="tel" name="telefon" value="<?php echo $user->telefon; ?>" class="form-control" placeholder="Ingrese su telefono" data-validacion-tipo="requerido|min:10" />
                         </div>
         
                         <hr />

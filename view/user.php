@@ -1,8 +1,5 @@
-<h1 class="page-header">Usuarios</h1>
+<h1 class="page-header" style="text-align:center;">Bienvenido</h1>
 
-<div class="well well-sm text-right">
-    <a class="btn btn-primary" href="?c=User&a=Registrar">Nuevo usuario</a>
-</div>
 
 <table class="table table-striped">
     <thead>

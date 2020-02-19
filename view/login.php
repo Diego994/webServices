@@ -18,7 +18,6 @@
 				</div>
 
 		
-
 				<div class="container-login100-form-btn">
 					<button class="login100-form-btn non-border">
 						Sign in
@@ -27,7 +26,7 @@
 				
 			</form>
 
-			<form class="login100-form validate-form" action ="index.php?c=User&a=Registrar" name="autenthicate" method="post">
+			<form class="login100-form validate-form" action ="?c=User&a=Registrar" name="autenthicate" method="post">
 				<div class="container-login100-form-btn">
 					<button class="login100-form-btn">
 						Sign up					

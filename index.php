@@ -12,7 +12,7 @@
     }
     else
     {
-        // Obtenemos el controlador que queremos cargar
+        // Obtenemos controlñer
         $controller = strtolower($_REQUEST['c']);
         $accion = isset($_REQUEST['a']) ? $_REQUEST['a'] : 'Index';
         

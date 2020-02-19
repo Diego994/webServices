@@ -26,8 +26,6 @@
 		{
 			try
 			{
-				$result = array();
-
 				$stm = $this->pdo->prepare("SELECT * FROM user");
 				$stm->execute();
 
