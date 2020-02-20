@@ -1,7 +1,7 @@
 <?php
 	class User
 	{
-		private $pdo;
+		public $pdo;
 		
 		public $id;
 		public $name;
