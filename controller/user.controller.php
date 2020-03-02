@@ -23,6 +23,9 @@
 
             $serverURL = 'http://localhost/pwsdl/server2.php';
             $cliente = new nusoap_client("$serverURL?wsdl",'wsdl');
+            $conexion = array('hostName' => 'localhost','dbName' => 'webServices','user' => 'root','password' => 'admin');
+            $conexion = json_encode($conexion);
+            $conexion = json_decode($conexion);
         
     
             $user = new User();
@@ -40,18 +43,15 @@
                     "uri:$serverURL"
                 );
 
-                /*$req = json_decode($req);
-                $user->id = $req->id;
-                $user->name = $req->name;
-                $user->lastName = $req->lastName;
-                $user->password = $req->password;
-                $user->email = $req->email;
-                $user->telefon = $req->telefon;
+                $arrayUser = json_decode($req, true);
 
-                echo $user;*/
-
-                
-                echo $req;
+    
+                $user->id = $arrayUser[0]["id"];
+                $user->name = $arrayUser[0]["name"];
+                $user->lastName = $arrayUser[0]["lastName"];
+                $user->password = $arrayUser[0]["password"];
+                $user->email = $arrayUser[0]["email"];
+                $user->telefon = $arrayUser[0]["telefon"];
 
                 require_once 'view/header.php';
                 require_once 'view/user-edit.php';
@@ -88,19 +88,42 @@
         }
 
         public function Autenticar(){
+
+            require_once("lib/nusoap.php");
+
+            $serverURL = 'http://localhost/pwsdl/server2.php';
+            $cliente = new nusoap_client("$serverURL?wsdl",'wsdl');
+            $conexion = array('hostName' => 'localhost','dbName' => 'webServices','user' => 'root','password' => 'admin');
+            $conexion = json_encode($conexion);
+            $conexion = json_decode($conexion);
+            
             $user = new User();
 
             $dataEmail = $_REQUEST['email'];
             $dataPassword = $_REQUEST['password'];
 
-            $user = $this->model->Autenticar(strval($dataEmail));
 
-            if(strcmp($dataEmail,$user->email) == 0 && $dataEmail !== '')
-            {
-                if(strcmp($dataPassword,$user->password) == 0 && $dataPassword !== ''){
-                require_once 'view/header.php';
-                require_once 'view/user.php';
-                require_once 'view/footer.php';
+            $auth = $cliente->call(
+                "authenticate",
+                array('hostName' => $conexion->hostName,
+                        'dbName' => $conexion->dbName,
+                        'user' => $conexion->user,
+                        'password' => $conexion->password,
+                        'table' => 'user', 
+                        'field' => 'email', 
+                        'passwordField' => 'password',
+                        'fieldVal' => $dataEmail,
+                        'passwordVal' => $dataPassword
+                    ),
+                "uri:$serverURL"
+            );
+        
+
+            if($dataEmail != '' && $dataPassword != ''){
+                if($auth == 'true'){
+                    require_once 'view/header.php';
+                    require_once 'view/product.php';
+                    require_once 'view/footer.php';
                 } else {
                     require_once 'view/header.php';
                     require_once 'view/login.php';
@@ -111,6 +134,7 @@
                 require_once 'view/login.php';
                 require_once 'view/footer.php';
             }
+            
             
         }
 }
