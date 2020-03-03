@@ -2,8 +2,6 @@
     require_once 'model/user.php';
     
 
-    
-
     class UserController{
         
         public $model;
@@ -121,9 +119,7 @@
 
             if($dataEmail != '' && $dataPassword != ''){
                 if($auth == 'true'){
-                    require_once 'view/header.php';
-                    require_once 'view/product.php';
-                    require_once 'view/footer.php';
+                    header('Location: http://localhost/webServices/index.php?c=Product&a=Index');
                 } else {
                     require_once 'view/header.php';
                     require_once 'view/login.php';

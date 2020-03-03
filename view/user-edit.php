@@ -8,7 +8,7 @@
                         <?php echo $user->id != null ? $user->name : 'Nuevo Registro'; ?>
                     </h1>
         
-                    <form id="frm-user" action="?c=user&a=Guardar" method="post" enctype="multipart/form-data">
+                    <form id="frm-user" action="?c=User&a=Guardar" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="id" value="<?php echo $user->id; ?>" />
         
                         <div class="form-group">

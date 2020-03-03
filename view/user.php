@@ -12,8 +12,10 @@
         </tr>
     </thead>
     <tbody>
+    <?php print_r($this->model->Listar())?>
     <?php foreach($this->model->Listar() as $r): ?>
         <tr>
+            <td><?php print_r( $r) ?></td>
             <td><?php echo $r->name; ?></td>
             <td><?php echo $r->lastName; ?></td>
             <td><?php echo $r->password; ?></td>
