@@ -28,7 +28,8 @@
     
             $user = new User();
             
-            if(isset($_REQUEST['id'])){
+            if($_REQUEST['id']){
+                $_REQUEST['id'];
 
                 $req = $cliente->call(
                     "getById",
@@ -37,7 +38,7 @@
                             'user' => 'root',
                             'password' => 'admin',
                             'table' => 'user',
-                             'id' => 1),
+                             'id' => $_REQUEST['id']),
                     "uri:$serverURL"
                 );
 
@@ -119,7 +120,7 @@
 
             if($dataEmail != '' && $dataPassword != ''){
                 if($auth == 'true'){
-                    header('Location: http://localhost/webServices/index.php?c=Product&a=Index');
+                    header('Location: http://localhost/webServices/index.php?c=Product&a=Index&email='.$dataEmail);
                 } else {
                     require_once 'view/header.php';
                     require_once 'view/login.php';

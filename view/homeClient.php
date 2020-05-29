@@ -11,9 +11,11 @@
             <hr style="background-color:white;">
             </a>
           </li>
+          <!--
           <li class="nav-item">
             <a class="nav-link" href="index.php?c=Product&a=newProduct">New Product</a>
           </li>
+          -->
           
         </ul>
       </div>
@@ -30,7 +32,6 @@
         <h1 class="my-4">Tenis Store</h1>
         <div class="list-group">
           <a href="#" class="list-group-item">Tenis deportivos</a>
-          <h1>Vista admin</h1>
         </div>
 
       </div>
@@ -71,25 +72,30 @@
 
               <div class="col-lg-4 col-md-6 mb-4">
               <div class="card h-100">
-                <a href="index.php?c=Product&a=newProduct&id=<?php echo $p['id'] ?>"><img class="card-img-top" src=<?php echo "assets/images/products/".$p['image']?> alt=""></a>
+                <img class="card-img-top" src=<?php echo "assets/images/products/".$p['image']?> alt="">
                 <div class="card-body">
                   <h4 class="card-title">
-                    <a href="index.php?c=Product&a=newProduct&id=<?php echo $p['id'] ?>">
-                      <?php echo $p['name'] != null ? $p['name'] : 'Nuevo Producto'; ?>
-                    </a>
+                    <?php echo $p['name'] != null ? $p['name'] : 'Nuevo Producto'; ?>
                   </h4>
                   <h5><?php echo $p['cost']?> $</h5>
                   <p class="card-text"><?php echo $p['description']?></p>
                 </div>
-                <!--<a href="index.php?c=Product&a=Eliminar&id=<?php echo $p['id'] ?>">-->
-                  <div class='card-footer deleteProduct' style=' background-color: crimson; cursor: pointer;'>
-                    <small id='<?php echo $p['id'] ?>' class='text-muted' style='text-align:center;'> <h3 style='color:white;'><i class="fa fa-trash"></i></h3></small>
-                  </div>
-                <!--</a>-->
+                <?php   if($p['availability']==0){
+                    echo "<div class='card-footer' style=' background-color:crimson'>";
+                    echo "<small class='text-muted' style='text-align:center;'> <h3 style='color:white;'>No disponible</h3></small>";
+                    echo "</div>";
+                } else if ($p['availability']==1){
+                    echo "<div class='card-footer' style=' background-color: darkslategray;'>";
+                    echo "<small class='text-muted' style='text-align:center; background-color:green;'> <h3 style='color:white;'>Disponible</h3></small>";
+                    echo "</div>";
+                }
+                ?>
               </div>
             </div>
 
           <?php endforeach; ?>
+
+          
 
         </div>
         <!-- /.row -->
@@ -102,13 +108,3 @@
 
   </div>
   <!-- /.container -->
-  <script  src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-  <script>
-    $(".deleteProduct").click(function() {
-            var id = $(this).children('small').attr('id');
-            if (confirm('Estas seguro de borrar este producto?')) {
-              window.location.href = (window.location.pathname + '?c=Product&a=Eliminar&id=' +id);
-            } else {
-            }
-        });
-  </script>
