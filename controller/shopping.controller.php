@@ -1,14 +1,15 @@
 <?php
+    require_once 'model/shopping.php';
     require_once 'model/product.php';
     require_once 'model/user.php';
     
 
-    class ProductController{
+    class ShoppingController{
         
         public $model;
         
         public function __CONSTRUCT(){
-            $this->model = new Product();
+            $this->model = new Shopping();
         }
 
         public function Index(){
@@ -35,43 +36,27 @@
             $arrayUser = json_decode($reqUser, true);
             $idUser = $arrayUser[0]['id'];
 
-            $reqSession = $cliente->call(
-                "getSessionById",
+            $reqProducts = $cliente->call(
+                "getAllPurchasesByClientId",
                 array('hostName' => 'localhost',
                         'dbName' => 'webServices',
                         'user' => 'root',
                         'password' => 'admin',
-                        'id' => $idUser,
-                        'idAdmin' => 1),
+                        'table' => 'shopping',
+                        'userIdColumn' => 'idUser',
+                        'idUser' => $idUser),
                 "uri:$serverURL"
             );
 
-            $req = $cliente->call(
-                "getAll",
-                array('hostName' => 'localhost',
-                        'dbName' => 'webServices',
-                        'user' => 'root',
-                        'password' => 'admin',
-                        'table' => 'product'),
-                "uri:$serverURL"
-            );
+            $arrayProduct = json_decode($reqProducts, true);
 
-            $arrayProduct = json_decode($req, true);
-
-            if($reqSession == 'true'){
-                require_once 'view/header.php';
-                //print_r($arrayProduct);
-                require_once 'view/home.php';
-                require_once 'view/footer.php';
-            } else {
-                require_once 'view/header.php';
-                //print_r($arrayProduct);
-                require_once 'view/homeClient.php';
-                require_once 'view/footer.php';
-            }
+            require_once 'view/header.php';
+            //print_r($arrayProduct);
+            require_once 'view/shopping.php';
+            require_once 'view/footer.php';
         }
         
-        public function newProduct(){
+        public function Add(){
 
             require_once("lib/nusoap.php");
 
@@ -80,45 +65,42 @@
             $conexion = array('hostName' => 'localhost','dbName' => 'webServices','user' => 'root','password' => 'admin');
             $conexion = json_encode($conexion);
             $conexion = json_decode($conexion);
-            
-            $userEmail = $_REQUEST['email'];
-        
+
+            $idProduct = $_REQUEST['idProducto'];
+            $idUsuario = $_REQUEST['idUsuario'];
+
+            $reqProduct = $cliente->call(
+                "getById",
+                array('hostName' => 'localhost',
+                        'dbName' => 'webServices',
+                        'user' => 'root',
+                        'password' => 'admin',
+                        'table' => 'product',
+                         'id' => $idProduct),
+                "uri:$serverURL"
+            );
+
+            $arrayProduct = json_decode($reqProduct, true);
+
+            $reqPurchase = $cliente->call(
+                "addPurchase",
+                array('hostName' => 'localhost',
+                        'dbName' => 'webServices',
+                        'user' => 'root',
+                        'password' => 'admin',
+                        'table' => 'shopping',
+                        'idUser' => $idUsuario,
+                        'idProduct' => $idProduct,
+                        'productName' => $arrayProduct[0]["name"],
+                        'cost' => $arrayProduct[0]["cost"],
+                        'image' => $arrayProduct[0]["image"]),
+                "uri:$serverURL"
+            );
     
-            $product = new Product();
-            
-            if(isset($_REQUEST['id'])){
 
-                $req = $cliente->call(
-                    "getById",
-                    array('hostName' => 'localhost',
-                            'dbName' => 'webServices',
-                            'user' => 'root',
-                            'password' => 'admin',
-                            'table' => 'product',
-                             'id' => $_REQUEST['id']),
-                    "uri:$serverURL"
-                );
-
-                $arrayProduct = json_decode($req, true);
-    
-                $product->id = $arrayProduct[0]["id"];
-                $product->name = $arrayProduct[0]["name"];
-                $product->cost = $arrayProduct[0]["cost"];
-                $product->description = $arrayProduct[0]["description"];
-                $product->availability = $arrayProduct[0]["availability"];
-                $product->stock = $arrayProduct[0]["stock"];
-                $product->image = $arrayProduct[0]["image"];
-
-                require_once 'view/header.php';
-                require_once 'view/product.php';
-                require_once 'view/footer.php';
+            header('Location: index.php?c=Product&a=Index&email=dani@rocha.com');
 //                $user = $this->model->Obtener($_REQUEST['id']);
 
-            } else {
-                require_once 'view/header.php';
-                require_once 'view/product.php';
-                require_once 'view/footer.php';
-            }
         }
         
         
@@ -156,7 +138,7 @@
             $product->stock = $_REQUEST['stock'];
             $product->image = $_REQUEST['image'];
 
-            $product->id > 0 
+            $user->id > 0 
                 ? $this->model->Actualizar($product)
                 : $this->model->Registrar($product);
             

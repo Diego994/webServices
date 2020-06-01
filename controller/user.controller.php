@@ -29,7 +29,6 @@
             $user = new User();
             
             if($_REQUEST['id']){
-                $_REQUEST['id'];
 
                 $req = $cliente->call(
                     "getById",

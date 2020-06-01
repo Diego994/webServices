@@ -1,14 +1,13 @@
 <?php
-	class Product
+	class Shopping
 	{
 		public $pdo;
 		
 		public $id;
+		public $idUser;
+		public $idProduct;
 		public $name;
 		public $cost;
-		public $description;
-		public $availability;
-        public $stock;
         public $image;
 
 		public function __CONSTRUCT()
@@ -28,7 +27,7 @@
 			try 
 			{
 				$stm = $this->pdo
-						->prepare("SELECT * FROM product WHERE id = ?");
+						->prepare("SELECT * FROM shopping WHERE id = ?");
 						
 
 				$stm->execute(array($id));
@@ -43,7 +42,7 @@
 		{
 			try 
 			{
-				$sql = "UPDATE product SET 
+				$sql = "UPDATE user SET 
 							name          = ?, 
 							cost        = ?,
 							description        = ?,

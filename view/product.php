@@ -9,7 +9,7 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="index.php?c=Product&a=Index">Home
+            <a class="nav-link" href="index.php?c=Product&a=Index&email=<?php echo $userEmail?>">Home
             </a>
           </li>
           <li class="nav-item">

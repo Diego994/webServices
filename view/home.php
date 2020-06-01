@@ -1,3 +1,8 @@
+<style>
+  li{
+    margin-right: 12px;
+  }
+</style>
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
@@ -5,6 +10,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
+        <h1 style="color: white;">Bienvenido Administrador</h1>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
             <a class="nav-link" href="#">Home
@@ -12,7 +18,10 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="index.php?c=Product&a=newProduct">New Product</a>
+            <a class="nav-link" href="index.php?c=Product&a=newProduct&email=<?php echo $userEmail?>">New Product</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.php">Salir</a>
           </li>
           
         </ul>
@@ -30,7 +39,6 @@
         <h1 class="my-4">Tenis Store</h1>
         <div class="list-group">
           <a href="#" class="list-group-item">Tenis deportivos</a>
-          <h1>Vista admin</h1>
         </div>
 
       </div>
@@ -105,10 +113,16 @@
   <script  src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
   <script>
     $(".deleteProduct").click(function() {
-            var id = $(this).children('small').attr('id');
-            if (confirm('Estas seguro de borrar este producto?')) {
-              window.location.href = (window.location.pathname + '?c=Product&a=Eliminar&id=' +id);
-            } else {
-            }
-        });
+        var id = $(this).children('small').attr('id');
+        if (confirm('Estas seguro de borrar este producto?')) {
+            window.location.href = (window.location.pathname + '?c=Product&a=Eliminar&id=' +id);
+        } else {
+        }
+    });
+    $(document).ready(function() {
+        window.history.pushState(null, "", window.location.href);        
+        window.onpopstate = function() {
+            window.history.pushState(null, "", window.location.href);
+        };
+    });
   </script>

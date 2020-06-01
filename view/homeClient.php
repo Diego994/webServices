@@ -1,3 +1,8 @@
+<style>
+  li{
+    margin-right: 12px;
+  }
+</style>
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
@@ -5,11 +10,18 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
+        <h1 style="color: white;">Bienvenid@ <?php echo $arrayUser[0]['name']?></h1>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
             <a class="nav-link" href="#">Home
             <hr style="background-color:white;">
             </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.php?c=Shopping&a=Index&email=<?php echo $userEmail?>">Shopping &nbsp;<i class='fa fa-cart-plus'></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.php">Salir</a>
           </li>
           <!--
           <li class="nav-item">
@@ -72,7 +84,7 @@
 
               <div class="col-lg-4 col-md-6 mb-4">
               <div class="card h-100">
-                <img class="card-img-top" src=<?php echo "assets/images/products/".$p['image']?> alt="">
+                <img class="card-img-top" src=<?php echo "assets/images/products/".$p['image']?> alt=<?php echo $p['image']?>>
                 <div class="card-body">
                   <h4 class="card-title">
                     <?php echo $p['name'] != null ? $p['name'] : 'Nuevo Producto'; ?>
@@ -82,11 +94,11 @@
                 </div>
                 <?php   if($p['availability']==0){
                     echo "<div class='card-footer' style=' background-color:crimson'>";
-                    echo "<small class='text-muted' style='text-align:center;'> <h3 style='color:white;'>No disponible</h3></small>";
+                    echo "<small class='text-muted' style='text-align:center;'> <h3 style='color:white; cursor: default;'>No disponible</h3></small>";
                     echo "</div>";
                 } else if ($p['availability']==1){
-                    echo "<div class='card-footer' style=' background-color: darkslategray;'>";
-                    echo "<small class='text-muted' style='text-align:center; background-color:green;'> <h3 style='color:white;'>Disponible</h3></small>";
+                    echo "<div class='card-footer shoppingBtn' id=".$p['id']." style=' background-color: darkslategray; cursor: pointer;'>";
+                    echo "<small id=".$idUser." class='text-muted' style='text-align:center; background-color:green;'> <h3 style='color:white;'>Disponible &nbsp; &nbsp;<i class='fa fa-cart-plus'></i></h3></small>";
                     echo "</div>";
                 }
                 ?>
@@ -108,3 +120,23 @@
 
   </div>
   <!-- /.container -->
+  <script  src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script>
+    $(document).ready(function() {
+        window.history.pushState(null, "", window.location.href);        
+        window.onpopstate = function() {
+            window.history.pushState(null, "", window.location.href);
+        };
+    });
+
+    $(".shoppingBtn").click(function() {
+        var idProduct = $(this).attr('id');
+        var idUser = $(this).children('small').attr('id')
+        console.log(idProduct)
+        console.log(idUser)
+        if (confirm('Deseas agregar al carrito este producto?')) {
+            window.location.href = (window.location.pathname + '?c=Shopping&a=Add&idProducto='+idProduct+'&idUsuario='+idUser);
+        } else {
+        }
+    });
+  </script>
