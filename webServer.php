@@ -1,6 +1,6 @@
 <?php
     require_once("lib/nusoap.php");
-    $miURL = "http://localhost/webServices/webServer.php";
+    $miURL = "http://192.168.100.18:80/webServices/webServer.php";
     $server = new soap_server();
     $server->configureWSDL('WSDLTST',$miURL);
     $server->wsdl->schemaTargetNamespace=$miURL;

@@ -14,7 +14,7 @@
         public function Index(){
             require_once("lib/nusoap.php");
 
-            $serverURL = 'http://localhost/pwsdl/server2.php';
+            $serverURL = 'http://192.168.100.18/pwsdl/server2.php';
             $cliente = new nusoap_client("$serverURL?wsdl",'wsdl');
             $conexion = array('hostName' => 'localhost','dbName' => 'webServices','user' => 'root','password' => 'admin');
             $conexion = json_encode($conexion);
@@ -75,7 +75,7 @@
 
             require_once("lib/nusoap.php");
 
-            $serverURL = 'http://localhost/pwsdl/server2.php';
+            $serverURL = 'http://192.168.100.18/pwsdl/server2.php';
             $cliente = new nusoap_client("$serverURL?wsdl",'wsdl');
             $conexion = array('hostName' => 'localhost','dbName' => 'webServices','user' => 'root','password' => 'admin');
             $conexion = json_encode($conexion);
@@ -124,27 +124,6 @@
         
         public function Guardar(){
             $target_dir = "http://localhost/webServices/assets/images/products";
-            $target_file = $target_dir . basename($_FILES["image"]["name"]);
-            $uploadOk = 1;
-            $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-            
-            // Check if file already exists
-            if (file_exists($target_file)) {
-                echo "Sorry, file already exists.";
-                $uploadOk = 0;
-            }
-         
-            // Check if $uploadOk is set to 0 by an error
-            if ($uploadOk == 0) {
-                echo "Sorry, your file was not uploaded.";
-            // if everything is ok, try to upload file
-            } else {
-                if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
-                    echo "The file ". basename( $_FILES["image"]["name"]). " has been uploaded.";
-                } else {
-                    echo "Sorry, there was an error uploading your file.";
-                }
-            }
 
             $product = new Product();
             
@@ -167,7 +146,7 @@
 
             require_once("lib/nusoap.php");
 
-            $serverURL = 'http://localhost/pwsdl/server2.php';
+            $serverURL = 'http://192.168.100.18/pwsdl/server2.php';
             $cliente = new nusoap_client("$serverURL?wsdl",'wsdl');
             $conexion = array('hostName' => 'localhost','dbName' => 'webServices','user' => 'root','password' => 'admin');
             $conexion = json_encode($conexion);

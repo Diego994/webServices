@@ -2,7 +2,7 @@
     require_once 'model/database.php';
     require_once("lib/nusoap.php");
 
-    $serverURL = "http://localhost/pwsdl/server2.php";
+    $serverURL = "http://192.168.100.18:80/pwsdl/server2.php";
     $cliente = new nusoap_client("$serverURL?wsdl",'wsdl');
 
     $controller = 'user';

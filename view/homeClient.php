@@ -98,7 +98,7 @@
                     echo "</div>";
                 } else if ($p['availability']==1){
                     echo "<div class='card-footer shoppingBtn' id=".$p['id']." style=' background-color: darkslategray; cursor: pointer;'>";
-                    echo "<small id=".$idUser." class='text-muted' style='text-align:center; background-color:green;'> <h3 style='color:white;'>Disponible &nbsp; &nbsp;<i class='fa fa-cart-plus'></i></h3></small>";
+                    echo "<small id=".$idUser." class='text-muted' style='text-align:center; background-color:green;'> <h3 id=".$userEmail." style='color:white;'>Disponible &nbsp; &nbsp;<i class='fa fa-cart-plus'></i></h3></small>";
                     echo "</div>";
                 }
                 ?>
@@ -132,10 +132,12 @@
     $(".shoppingBtn").click(function() {
         var idProduct = $(this).attr('id');
         var idUser = $(this).children('small').attr('id')
+        var userEmail = $(this).children('small').children('h3').attr('id')
         console.log(idProduct)
         console.log(idUser)
+        console.log(userEmail)
         if (confirm('Deseas agregar al carrito este producto?')) {
-            window.location.href = (window.location.pathname + '?c=Shopping&a=Add&idProducto='+idProduct+'&idUsuario='+idUser);
+            window.location.href = (window.location.pathname + '?c=Shopping&a=Add&idProducto='+idProduct+'&idUsuario='+idUser+'&email='+userEmail);
         } else {
         }
     });

@@ -64,7 +64,7 @@
 
     <div class="form-group">
         <label>image</label>
-        <input type="file" name="image" value="<?php echo $product->image; ?>" class="form-control" placeholder="imagen del producto" />
+        <input id="image" type="file" name="image" value="<?php echo $product->image; ?>" class="form-control" placeholder="imagen del producto" />
     </div>
 
     <br>

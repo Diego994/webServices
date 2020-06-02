@@ -19,7 +19,7 @@
         public function Registrar(){
             require_once("lib/nusoap.php");
 
-            $serverURL = 'http://localhost/pwsdl/server2.php';
+            $serverURL = 'http://192.168.100.18/pwsdl/server2.php';
             $cliente = new nusoap_client("$serverURL?wsdl",'wsdl');
             $conexion = array('hostName' => 'localhost','dbName' => 'webServices','user' => 'root','password' => 'admin');
             $conexion = json_encode($conexion);
@@ -89,7 +89,7 @@
 
             require_once("lib/nusoap.php");
 
-            $serverURL = 'http://localhost/pwsdl/server2.php';
+            $serverURL = 'http://192.168.100.18/pwsdl/server2.php';
             $cliente = new nusoap_client("$serverURL?wsdl",'wsdl');
             $conexion = array('hostName' => 'localhost','dbName' => 'webServices','user' => 'root','password' => 'admin');
             $conexion = json_encode($conexion);

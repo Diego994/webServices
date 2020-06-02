@@ -15,7 +15,7 @@
         public function Index(){
             require_once("lib/nusoap.php");
 
-            $serverURL = 'http://localhost/pwsdl/server2.php';
+            $serverURL = 'http://192.168.100.18/pwsdl/server2.php';
             $cliente = new nusoap_client("$serverURL?wsdl",'wsdl');
             $conexion = array('hostName' => 'localhost','dbName' => 'webServices','user' => 'root','password' => 'admin');
             $conexion = json_encode($conexion);
@@ -60,7 +60,7 @@
 
             require_once("lib/nusoap.php");
 
-            $serverURL = 'http://localhost/pwsdl/server2.php';
+            $serverURL = 'http://192.168.100.18/pwsdl/server2.php';
             $cliente = new nusoap_client("$serverURL?wsdl",'wsdl');
             $conexion = array('hostName' => 'localhost','dbName' => 'webServices','user' => 'root','password' => 'admin');
             $conexion = json_encode($conexion);
@@ -68,6 +68,7 @@
 
             $idProduct = $_REQUEST['idProducto'];
             $idUsuario = $_REQUEST['idUsuario'];
+            $userEmail = $_REQUEST['email'];
 
             $reqProduct = $cliente->call(
                 "getById",
@@ -98,12 +99,71 @@
             );
     
 
-            header('Location: index.php?c=Product&a=Index&email=dani@rocha.com');
+            header('Location: index.php?c=Product&a=Index&email='.$userEmail);
 //                $user = $this->model->Obtener($_REQUEST['id']);
 
         }
         
-        
+        public function Buy(){
+            require_once("lib/nusoap.php");
+
+            $serverURL = 'http://192.168.100.18/pwsdl/server2.php';
+            $cliente = new nusoap_client("$serverURL?wsdl",'wsdl');
+            $conexion = array('hostName' => 'localhost','dbName' => 'webServices','user' => 'root','password' => 'admin');
+            $conexion = json_encode($conexion);
+            $conexion = json_decode($conexion);
+
+            $idUsuario = $_REQUEST['idUser'];
+            $userEmail = $_REQUEST['email'];
+
+            $reqPurchase = $cliente->call(
+                "buyByUserEmail",
+                array('hostName' => 'localhost',
+                        'dbName' => 'webServices',
+                        'user' => 'root',
+                        'password' => 'admin',
+                        'table' => 'shopping',
+                        'costColumn' => 'cost',
+                        'idUserColumn' => 'idUser',
+                        'idUser' => $idUsuario,
+                        'userEmail' => $userEmail,
+                        'resultAlias' => 'compra'),
+                "uri:$serverURL"
+            );
+
+            header('Location: index.php?c=Shopping&a=Delete&id='.$idUsuario.'&email='.$userEmail);
+
+        }
+
+        public function Delete(){
+
+            require_once("lib/nusoap.php");
+
+            $serverURL = 'http://192.168.100.18/pwsdl/server2.php';
+            $cliente = new nusoap_client("$serverURL?wsdl",'wsdl');
+            $conexion = array('hostName' => 'localhost','dbName' => 'webServices','user' => 'root','password' => 'admin');
+            $conexion = json_encode($conexion);
+            $conexion = json_decode($conexion);
+
+            $idUsuario = $_REQUEST['id'];
+            $email = $_REQUEST['email'];
+
+            $req = $cliente->call(
+                "deletePurchases",
+                array('hostName' => 'localhost',
+                        'dbName' => 'webServices',
+                        'user' => 'root',
+                        'password' => 'admin',
+                        'table' => 'shopping',
+                         'id' => $idUsuario),
+                "uri:$serverURL"
+            );
+
+            if($req == 'true'){
+                header('Location: index.php?c=Product&a=Index&email='.$email);
+            }
+        }
+
         public function Guardar(){
             $target_dir = "http://localhost/webServices/assets/images/products";
             $target_file = $target_dir . basename($_FILES["image"]["name"]);
@@ -145,32 +205,5 @@
             header('Location: index.php?c=Product&a=Index&email=dguerrero@storecheck.com');
         }
         
-        public function Eliminar(){
-
-            require_once("lib/nusoap.php");
-
-            $serverURL = 'http://localhost/pwsdl/server2.php';
-            $cliente = new nusoap_client("$serverURL?wsdl",'wsdl');
-            $conexion = array('hostName' => 'localhost','dbName' => 'webServices','user' => 'root','password' => 'admin');
-            $conexion = json_encode($conexion);
-            $conexion = json_decode($conexion);
-
-            $productId = $_REQUEST['id'];
-
-            $req = $cliente->call(
-                "deleteById",
-                array('hostName' => 'localhost',
-                        'dbName' => 'webServices',
-                        'user' => 'root',
-                        'password' => 'admin',
-                        'table' => 'product',
-                         'id' => $productId),
-                "uri:$serverURL"
-            );
-
-            if($req == 'true'){
-                header('Location: index.php?c=Product&a=Index&email=dguerrero@storecheck.com');
-            }
-        }
 
 }
